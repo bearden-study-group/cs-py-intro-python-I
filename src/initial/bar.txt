@@ -1,3 +1,0 @@
-We are writing a new file!
-Hello,
-World

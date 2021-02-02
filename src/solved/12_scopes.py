@@ -2,23 +2,32 @@
 # Good reading: https://www.programiz.com/python-programming/global-local-nonlocal-variables
 
 # When you use a variable in a function, it's local in scope to the function.
+################################################################################
+# PROBLEM 1
+################################################################################
+# When you use a variable in a function, it's local in scope to the function.
+
 x = 12
 
 
 def change_x():
     global x
     x = 99
-    # print(x)
 
 
 change_x()
 
-# This prints 12. What do we have to modify in change_x() to get it to print 99?
-print(x)
+change_x()
 
+# This prints 12. What do we have to modify in change_x() to get it to print 99?
+print(f"after invoking change_x: x = {x}")  # prints 12, but we WANT IT to print 99
+
+
+################################################################################
+# PROBLEM 2
+################################################################################
 
 # This nested function has a similar problem.
-
 def outer():
     y = 120
 
@@ -31,36 +40,48 @@ def outer():
     # This prints 120. What do we have to change in inner() to get it to print
     # 999?
     # Note: Google "python nested function scope".
-    print(y)
+    print(f"from outer: y = {y}")  # prints 120, but we WANT it to print 999
 
 
 outer()
 
 
+# ------------------------------------------------------------------------------
+# STRETCH — PROBLEM 3
+# this should be solved in a different way than above!!
+# hint: it has to do with dot notation
+# ------------------------------------------------------------------------------
 def outer_two():
     outer_two.y = 120
 
     def inner():
         outer_two.y = 888
-        print(outer_two.y)
 
     inner()
 
-    print(outer_two.y)
+    print(f"from outer_two: outer_two.y = {outer_two.y}")  # prints 120 but we WANT it to print 888
 
 
 outer_two()
 
 
-def closure_out(static_in):
-    def closure_in(param):
-        return static_in + param
+# ------------------------------------------------------------------------------
+# STRETCH — PROBLEM 4
+# closures exist in Python :) —— all the web people can be happy now
+#
+# make a function called `make_greeter` that takes a name as an argument.
+# `make_greeter` should  use a closure to create and return a new, invokable function
+# that will return a greeting specifically for that name!
+# -------------------------------------------------------------------------------
 
-    return closure_in
+def make_greeter(name):
+    def greeter():
+        return f"Hello there, {name}!"
+
+    return greeter
 
 
-a = closure_out(1)
-b = closure_out(100)
-
-print(a(2))
-print(b(2))
+greet_ava = make_greeter("Ava")
+hello_doc = make_greeter("Doc")
+print(greet_ava())  # should print "Hello there, Ava!"
+print(hello_doc())  # should print "Hello there, Doc!"

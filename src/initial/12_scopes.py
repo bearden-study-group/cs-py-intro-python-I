@@ -39,10 +39,12 @@ def outer():
 
 outer()
 
-################################################################################
-# PROBLEM 3
+
+# ------------------------------------------------------------------------------
+# STRETCH — PROBLEM 3
 # this should be solved in a different way than above!!
-################################################################################
+# hint: it has to do with dot notation
+# ------------------------------------------------------------------------------
 def outer_two():
     y = 120
 
@@ -57,19 +59,23 @@ def outer_two():
 outer_two()
 
 
-################################################################################
-# PROBLEM 4
+# ------------------------------------------------------------------------------
+# STRETCH — PROBLEM 4
 # closures exist in Python :) —— all the web people can be happy now
-################################################################################
-def closure_out(static_in):
-    def closure_in(param):
-        return static_in + param
+#
+# make a function called `make_greeter` that takes a name as an argument.
+# `make_greeter` should  use a closure to create and return a new, invokable function
+# that will return a greeting specifically for that name!
+# -------------------------------------------------------0-----------------------
 
-    return closure_in
+def make_greeter(name):
+    def greeter():
+        return f"Hello there, {name}!"
+
+    return greeter
 
 
-a = closure_out(1)
-b = closure_out(100)
-
-print(a(2))
-print(b(2))
+greet_ava = make_greeter("Ava")
+hello_doc = make_greeter("Doc")
+print(greet_ava())  # should print "Hello there, Ava!"
+print(hello_doc())  # should print "Hello there, Doc!"
