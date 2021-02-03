@@ -28,7 +28,6 @@
 ####################################
 # YOUR CODE HERE
 
-
 # Without changing the following line, how can you make it print into something
 # more human-readable? Hint: Look up the `object.__str__` method
 print(waypoint)
